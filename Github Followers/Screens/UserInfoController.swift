@@ -9,9 +9,8 @@
 import UIKit
 
 
-protocol UserInfoControllerDelegate: class {
-    func didTapGitHubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+protocol UserInfoDelegate: class {
+    func didRequestFollowers(for username: String)
 }
 
 
@@ -25,7 +24,7 @@ class UserInfoController: GFDataLoadingController {
 
     
     var username: String!
-    weak var delegate: FollowerListControllerDelegate!
+    weak var delegate: UserInfoDelegate!
     
     
     override func viewDidLoad() {
@@ -51,11 +50,8 @@ class UserInfoController: GFDataLoadingController {
     
     
     func configureUIElements(with user: User) {
-        let repoItemController = GFRepoItemInfoController(user: user)
-        repoItemController.delegate = self
-        
-        let followerItemController = GFFollowerController(user: user)
-        followerItemController.delegate = self
+        let repoItemController = GFRepoItemInfoController(user: user, delegate: self)
+        let followerItemController = GFFollowerController(user: user, delegate: self)
         
         self.add(childVC: GFUserInfoHeaderController(user: user), to: self.headerView)
         self.add(childVC: repoItemController, to: self.itemViewOne)
@@ -95,7 +91,7 @@ class UserInfoController: GFDataLoadingController {
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
@@ -104,7 +100,7 @@ class UserInfoController: GFDataLoadingController {
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
             
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18)
+            dateLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -119,8 +115,7 @@ class UserInfoController: GFDataLoadingController {
 }
 
 
-extension UserInfoController: UserInfoControllerDelegate {
-    
+extension UserInfoController: GFRepoDelegate {
     func didTapGitHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
             presentGFAlertOnMainThread(title: "Invalid URL", message: "The url attached to this user is invalid.", buttonTitle: "Ok")
@@ -129,8 +124,10 @@ extension UserInfoController: UserInfoControllerDelegate {
         
         presentSafariController(with: url)
     }
-    
-    
+}
+
+
+extension UserInfoController: GFFollowerDelegate {
     func didTapGetFollowers(for user: User) {
         guard user.followers != 0 else {
             presentGFAlertOnMainThread(title: "No Followers", message: "This user has no followers. What a shame 😞.", buttonTitle: "So sad")
@@ -140,6 +137,5 @@ extension UserInfoController: UserInfoControllerDelegate {
         delegate.didRequestFollowers(for: user.login)
         dissmissController()
     }
-    
-    
 }
+

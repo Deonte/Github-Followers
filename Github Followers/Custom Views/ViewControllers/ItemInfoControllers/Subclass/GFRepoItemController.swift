@@ -8,7 +8,24 @@
 
 import UIKit
 
+protocol GFRepoDelegate: class {
+    func didTapGitHubProfile(for user: User)
+}
+
 class GFRepoItemInfoController: GFItemInfoController {
+    
+    weak var delegate: GFRepoDelegate!
+
+
+    init(user: User, delegate: GFRepoDelegate) {
+        super.init(user: user)
+        self.delegate = delegate
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func viewDidLoad() {

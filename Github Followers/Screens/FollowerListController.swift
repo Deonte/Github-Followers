@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol FollowerListControllerDelegate: class {
-    func didRequestFollowers(for username: String)
-}
-
 
 class FollowerListController: GFDataLoadingController {
     
@@ -210,7 +206,7 @@ extension FollowerListController: UISearchResultsUpdating {
 }
 
 
-extension FollowerListController: FollowerListControllerDelegate {
+extension FollowerListController: UserInfoDelegate {
     
     func didRequestFollowers(for username: String) {
         self.username = username
