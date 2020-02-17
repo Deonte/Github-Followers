@@ -17,6 +17,7 @@ class GFItemInfoController: UIViewController {
     
     var user: User!
     
+    
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
         self.user = user

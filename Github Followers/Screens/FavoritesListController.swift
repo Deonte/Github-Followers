@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class FavoritesListController: GFDataLoadingController {
     
     let tableView = UITableView()
@@ -47,6 +45,7 @@ class FavoritesListController: GFDataLoadingController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+  
     
     func getFavorites() {
         PersistenceManager.retrieveFavorites { [weak self] result in
@@ -54,18 +53,22 @@ class FavoritesListController: GFDataLoadingController {
             
             switch result {
             case .success(let favorites):
-                
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
+                self.updateUI(with: favorites)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad stuff happened. 🤕", message: error.rawValue, buttonTitle: "Ok")
+            }
+        }
+    }
+    
+    
+    private func updateUI(with favorites: [Follower]) {
+        if favorites.isEmpty {
+            self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.", in: self.view)
+        } else {
+            self.favorites = favorites
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
             }
         }
     }
@@ -110,4 +113,5 @@ extension FavoritesListController: UITableViewDelegate, UITableViewDataSource {
             self.presentGFAlertOnMainThread(title: "Unable to remove.", message: error.rawValue, buttonTitle: "Ok")
         }
     }
+    
 }

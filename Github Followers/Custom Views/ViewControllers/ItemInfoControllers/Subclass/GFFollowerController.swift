@@ -16,6 +16,7 @@ class GFFollowerController: GFItemInfoController {
     
     weak var delegate: GFFollowerDelegate!
     
+    
     init(user: User, delegate: GFFollowerDelegate) {
         super.init(user: user)
         self.delegate = delegate
@@ -43,4 +44,5 @@ class GFFollowerController: GFItemInfoController {
     override func actionButtonTapped() {
         delegate.didTapGetFollowers(for: user)
     }
+    
 }

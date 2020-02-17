@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension UIView {
     
     func addSubviews(_ views: UIView...) {
@@ -25,4 +24,5 @@ extension UIView {
             trailingAnchor.constraint(equalTo: superview.trailingAnchor)
         ])
     }
+    
 }

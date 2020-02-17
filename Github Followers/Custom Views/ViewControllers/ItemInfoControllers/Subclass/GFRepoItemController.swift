@@ -44,4 +44,5 @@ class GFRepoItemInfoController: GFItemInfoController {
     override func actionButtonTapped() {
         delegate.didTapGitHubProfile(for: user)
     }
+    
 }

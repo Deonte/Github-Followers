@@ -8,11 +8,9 @@
 
 import UIKit
 
-
 protocol UserInfoDelegate: class {
     func didRequestFollowers(for username: String)
 }
-
 
 class UserInfoController: GFDataLoadingController {
     
@@ -25,7 +23,6 @@ class UserInfoController: GFDataLoadingController {
     let dateLabel = GFBodyLabel(textAlignment: .center)
     var itemViews: [UIView] = []
 
-    
     var username: String!
     weak var delegate: UserInfoDelegate!
     
@@ -91,7 +88,6 @@ class UserInfoController: GFDataLoadingController {
     
     
     func layoutUI() {
-        
         let padding: CGFloat = 20
         let itemHeight: CGFloat = 140
         itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
@@ -105,7 +101,6 @@ class UserInfoController: GFDataLoadingController {
                 itemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding)
             ])
         }
-       
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
@@ -142,6 +137,7 @@ extension UserInfoController: GFRepoDelegate {
         
         presentSafariController(with: url)
     }
+    
 }
 
 
@@ -155,5 +151,6 @@ extension UserInfoController: GFFollowerDelegate {
         delegate.didRequestFollowers(for: user.login)
         dissmissController()
     }
+    
 }
 

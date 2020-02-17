@@ -41,5 +41,4 @@ class GFButton: UIButton {
         setTitle(title, for: .normal)
     }
     
-    
 }

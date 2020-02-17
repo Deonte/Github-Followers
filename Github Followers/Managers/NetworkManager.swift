@@ -9,11 +9,11 @@
 import UIKit
 
 class NetworkManager {
+    
     static let shared = NetworkManager()
     private let baseURL = "https://api.github.com"
     private let followersPerPage = 100
     let cache = NSCache<NSString, UIImage>()
-    
     
     private init() {}
     

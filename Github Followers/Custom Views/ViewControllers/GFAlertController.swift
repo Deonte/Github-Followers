@@ -99,5 +99,4 @@ class GFAlertController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
 }
