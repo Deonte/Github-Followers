@@ -15,7 +15,7 @@ protocol UserInfoControllerDelegate: class {
 }
 
 
-class UserInfoController: UIViewController {
+class UserInfoController: GFDataLoadingController {
     
     let headerView = UIView()
     let itemViewOne = UIView()
@@ -60,7 +60,7 @@ class UserInfoController: UIViewController {
         self.add(childVC: GFUserInfoHeaderController(user: user), to: self.headerView)
         self.add(childVC: repoItemController, to: self.itemViewOne)
         self.add(childVC: followerItemController, to: self.itemViewTwo)
-        self.dateLabel.text = "Github since \(user.createdAt.convertToDisplayFormat())"
+        self.dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormat())"
     }
     
     
