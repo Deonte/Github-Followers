@@ -104,6 +104,7 @@
 		040E68AA23B80AA1000B287C = {
 			isa = PBXGroup;
 			children = (
+				04252ABD23FC2EFE00BA9B18 /* Readme.md */,
 				040E68B523B80AA1000B287C /* Github Followers */,
 				040E68B423B80AA1000B287C /* Products */,
 			);
@@ -120,7 +121,6 @@
 		040E68B523B80AA1000B287C /* Github Followers */ = {
 			isa = PBXGroup;
 			children = (
-				04252ABD23FC2EFE00BA9B18 /* Readme.md */,
 				04FF6BCA23C139FB004F6F0E /* Utilities */,
 				04FF6BC723C12D1D004F6F0E /* Managers */,
 				046CF42923BD26C3005560DA /* Model */,
