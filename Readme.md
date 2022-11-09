@@ -1,7 +1,6 @@
-# Github Followers
+# Github Followers: UIKit
 
-
-This application is an excellent example of the basics of iOS Development. In  this application we receive data from the Github API and present it beautifully to the user. This application does not rely on any third party libraries.
+In  this application we receive data from the Github API and present it beautifully to the user. Without any third party libraries.
 
 - Programmatic UI
 - Networking
